@@ -9,6 +9,10 @@ router.get('/orders', (_, res) => {
 });
 
 router.post('/order', (req, res) => {
-  scheduler.scheduleNewOrder(req.body);
-  res.status(200).send('Order scheduled successfully');
+  if (req.body.recipient) {
+    scheduler.scheduleNewOrder(req.body);
+    res.status(200).send('Order scheduled successfully');
+  } else {
+    res.sendStatus(400);
+  }
 });
