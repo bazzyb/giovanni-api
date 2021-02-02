@@ -31,6 +31,16 @@ describe('Orders API', () => {
         });
     });
 
+    it('should return status 400', done => {
+      chai.request(app)
+        .post('/order')
+        .send({})
+        .end((_, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+
     it('should have 3 items in the schedule', done => {
       chai.request(app)
         .get('/orders')
